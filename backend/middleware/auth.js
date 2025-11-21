@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 
-const JWT_SECRET = "STATIC_SECRET_JWT_123456"; // bebas, cukup kuat
+const JWT_SECRET = "STATIC_SECRET_JWT_123456"; // bebas, yang penting kuat & tidak mudah ditebak
 
 module.exports = (req, res, next) => {
   const header = req.headers.authorization;
@@ -13,6 +13,6 @@ module.exports = (req, res, next) => {
     req.admin = decoded;
     next();
   } catch (err) {
-    res.status(401).json({ error: "Invalid token" });
+    return res.status(401).json({ error: "Invalid token" });
   }
 };
