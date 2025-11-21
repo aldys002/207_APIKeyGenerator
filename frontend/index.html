@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate API Key</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>Generate API Key</h2>
+
+        <div class="form-group">
+            <label>First Name</label>
+            <input type="text" id="firstname" placeholder="Enter first name">
+        </div>
+
+        <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" id="lastname" placeholder="Enter last name">
+        </div>
+
+        <div class="form-group">
+            <label>Email</label>
+            <input type="email" id="email" placeholder="Enter email">
+        </div>
+
+        <div class="form-group">
+            <label>Your API Key</label>
+            <input type="text" id="apikey" readonly placeholder="Click Generate">
+        </div>
+
+        <button class="btn-generate" onclick="generateKey()">Generate API Key</button>
+        <button class="btn-save" onclick="saveUser()">Save</button>
+
+        <div class="admin-links">
+            <a href="admin/login_admin.html">Admin Login</a> |
+            <a href="admin/register_admin.html">Admin Register</a>
+        </div>
+    </div>
+
+    <script src="assets/js/user.js"></script>
+</body>
+</html>
