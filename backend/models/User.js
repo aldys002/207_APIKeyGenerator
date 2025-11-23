@@ -1,5 +1,6 @@
 const { DataTypes } = require("sequelize");
 const db = require("../config/database");
+const ApiKey = require("./ApiKey"); // tambah import ApiKey
 
 const User = db.define("User", {
     id: {
@@ -32,5 +33,7 @@ const User = db.define("User", {
     tableName: "users",
     timestamps: false
 });
+
+
 
 module.exports = User;
