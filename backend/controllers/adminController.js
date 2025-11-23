@@ -8,7 +8,6 @@ module.exports = {
         try {
             const { email, password } = req.body;
 
-            // cek email sudah ada atau belum
             const exist = await Admin.findOne({ where: { email } });
             if (exist) return res.status(400).json({ error: "Email already registered" });
 
@@ -29,21 +28,37 @@ module.exports = {
 
     login: async (req, res) => {
         try {
+
+            // ===== DEBUG LOG WAJIB =====
+            console.log("====== LOGIN DEBUG START ======");
+            console.log("REQ BODY =", req.body);
+
             const { email, password } = req.body;
 
             const admin = await Admin.findOne({ where: { email } });
-            if (!admin) return res.status(404).json({ error: "Admin not found" });
+            console.log("ADMIN FOUND =", admin);
+
+            if (!admin) {
+                console.log("ADMIN NOT FOUND");
+                return res.status(404).json({ error: "Admin not found" });
+            }
 
             const isMatch = await bcrypt.compare(password, admin.password);
-            if (!isMatch) return res.status(400).json({ error: "Invalid password" });
+            console.log("PASSWORD MATCH =", isMatch);
 
-            // token buat middleware admin
+            if (!isMatch) {
+                console.log("INVALID PASSWORD");
+                return res.status(400).json({ error: "Invalid password" });
+            }
+
             const token = jwt.sign(
                 { id: admin.id, email: admin.email },
                 "STATIC_SECRET_JWT_123456",
                 { expiresIn: "1d" }
             );
 
+            console.log("TOKEN =", token);
+            console.log("======= LOGIN DEBUG END =======");
 
             res.json({
                 message: "Login successful",
@@ -52,6 +67,7 @@ module.exports = {
             });
 
         } catch (err) {
+            console.log("LOGIN ERROR =", err);
             res.status(500).json({ error: err.message });
         }
     }

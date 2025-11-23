@@ -3,7 +3,7 @@ const BASE_URL = "http://localhost:3000";
 
 // FIX TANPA MENGUBAH FORMAT
 // Backend kamu pakenya port 3000, maka harus 3000 juga
-const REAL_BASE_URL = "http://192.168.40.200:3000";
+const REAL_BASE_URL = "http://192.168.100.8:3000";
 
 
 const token = localStorage.getItem("token");
