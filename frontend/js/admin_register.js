@@ -1,21 +1,23 @@
-const API_ADMIN = "http://localhost:3000";
-
-async function adminRegister() {
+document.getElementById("adminRegisterForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
 
-    const res = await fetch(`${API_ADMIN}/admin/register`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password })
-    });
-
-    const data = await res.json();
-
-    if (data.success) {
-        alert("Admin berhasil diregister!");
-        window.location.href = "login_admin.html";
-    } else {
-        alert("Gagal: " + data.error);
+    try {
+        const res = await fetch("http://localhost:3000/admin/register", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, password })
+        });
+        const data = await res.json();
+        if (res.ok) {
+            document.getElementById("success").innerText = data.message;
+            document.getElementById("error").innerText = "";
+        } else {
+            document.getElementById("error").innerText = data.error;
+        }
+    } catch (err) {
+        console.error(err);
+        document.getElementById("error").innerText = "Server error";
     }
-}
+});
